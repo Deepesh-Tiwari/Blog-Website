@@ -1,0 +1,15 @@
+<%- include("./partials/header.ejs") %>
+<div class="form-container">
+    <form action="/edit-render" method="post">
+        <input type="hidden" name="id" value="<%= blog[0].id %>">
+        <div class="mb-3">
+            <label for="blogName" class="form-label">Blog Name</label>
+            <input type="text" class="form-control" name="blogName" value="<%= blog[0].blogname %> " required>
+        </div>
+        <div class="mb-3">
+            <label for="blogBody" class="form-label">Blog Body</label>
+            <textarea class="form-control" name="blogBody" rows="5"  required><%= blog[0].blogcontent%></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">Create Blog</button>
+    </form>
+<%- include("./partials/footer.ejs") %>

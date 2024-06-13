@@ -1,0 +1,45 @@
+<%- include("./partials/header.ejs") %>
+<div class="form-container">
+    <form action="/submit" method="post">
+        <div class="mb-3">
+            <label for="blogName" class="form-label">Blog Name</label>
+            <input type="text" class="form-control" name="blogName" required>
+        </div>
+        <div class="mb-3">
+            <label for="blogBody" class="form-label">Blog Body</label>
+            <textarea class="form-control" name="blogBody" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">Create Blog</button>
+    </form>
+</div>
+<% if(locals.blogarr ){ %>
+    <h1 class="secheading">Blogs</h1>
+    <div class="containerblog">
+        <div>
+        <% blogarr.forEach(function(blog) { %> 
+            <div class="blog">   
+                <div class="blogname"> <%= blog.blogname  %> </div>
+                <div class="buttons">
+                    <form action="/read" method="get">
+                        <input type="hidden" name="id" value="<%= blog.id %>">
+                        <button type="submit" class="btn btn-warning">Read</button>
+                    </form>
+                    <form action="/edit" method="get">
+                        <input type="hidden" name="id" value="<%= blog.id %>">
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="id" value="<%= blog.id %>">
+                        <button type="submit" class="btn btn-warning">Delete</button>
+                    </form>
+                </div>
+            </div> 
+        <%  });  %> 
+        </div> 
+    </div>
+<% } %>
+
+
+
+<%- include("./partials/footer.ejs") %>
